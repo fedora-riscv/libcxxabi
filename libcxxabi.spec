@@ -31,7 +31,9 @@ Summary:	Static libraries for libcxxabi
 %prep
 %setup -q -n %{name}-%{version}.src
 
+%if 0%{?fedora} >= 26
 sed -i 's|${LLVM_BINARY_DIR}/share/llvm/cmake|%{_libdir}/cmake/llvm|g' CMakeLists.txt
+%endif
 
 %build
 %ifarch armv7hl
