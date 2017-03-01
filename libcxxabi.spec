@@ -1,6 +1,6 @@
 Name:		libcxxabi
-Version:	3.8.1
-Release:	2%{?dist}
+Version:	3.8.0
+Release:	3%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
 URL:		http://libcxxabi.llvm.org/
@@ -90,11 +90,8 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
-* Wed Mar  1 2017 Tom Callaway <spot@fedoraproject.org> - 3.8.1-2
+* Wed Mar  1 2017 Tom Callaway <spot@fedoraproject.org> - 3.8.0-3
 - apply fixes from libcxx
-
-* Wed Sep  7 2016 Tom Callaway <spot@fedoraproject.org> - 3.8.1-1
-- update to 3.8.1
 
 * Mon Jul 25 2016 Tom Callaway <spot@fedoraproject.org> - 3.8.0-2
 - make static subpackage
