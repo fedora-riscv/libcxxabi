@@ -31,9 +31,7 @@ Summary:	Static libraries for libcxxabi
 %prep
 %setup -q -n %{name}-%{version}.src
 
-%if 0%{?fedora} >= 26
 sed -i 's|${LLVM_BINARY_DIR}/share/llvm/cmake|%{_libdir}/cmake/llvm|g' CMakeLists.txt
-%endif
 
 %build
 %ifarch armv7hl
@@ -90,6 +88,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Mon Apr 24 2017 Tom Callaway <spot@fedoraproject.org>
+- drop cmake mangling conditionalization
+
 * Sat Apr 22 2017 Tom Callaway <spot@fedoraproject.org> - 3.9.1-1
 - update to 3.9.1
 
