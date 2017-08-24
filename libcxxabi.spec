@@ -1,11 +1,11 @@
 Name:		libcxxabi
-Version:	3.9.1
-Release:	1%{?dist}
+Version:	4.0.1
+Release:	3%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
 URL:		http://libcxxabi.llvm.org/
 Source0:	http://llvm.org/releases/%{version}/libcxxabi-%{version}.src.tar.xz
-BuildRequires:	clang llvm-devel cmake
+BuildRequires:	clang llvm-devel cmake llvm-static
 BuildRequires:	libcxx-devel >= %{version}
 %if 0%{?rhel}
 # libcxx-devel has this, so we need to as well.
@@ -88,6 +88,18 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
+
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Fri Jun 23 2017 Tom Callaway <spot@fedoraproject.org> - 4.0.1-1
+- update to 4.0.1
+
+* Sat Apr 22 2017 Tom Callaway <spot@fedoraproject.org> - 4.0.0-1
+- update to 4.0.0
+
 * Sat Apr 22 2017 Tom Callaway <spot@fedoraproject.org> - 3.9.1-1
 - update to 3.9.1
 
