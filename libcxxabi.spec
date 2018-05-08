@@ -1,5 +1,5 @@
 Name:		libcxxabi
-Version:	5.0.1
+Version:	5.0.2
 Release:	1%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
@@ -88,6 +88,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Tue May 8 2018 Tom Stellard <tstellar@redhat.com> - 5.0.2-1
+- 5.0.2 Release
+
 * Thu Dec 21 2017 Tom Stellard <tstellar@redhat.com> - 5.0.1-1
 - 5.0.1 Release
 
