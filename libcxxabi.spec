@@ -4,7 +4,7 @@
 
 
 Name:		libcxxabi
-Version:	10.0.0
+Version:	10.0.1
 Release:	%{baserelease}%{?rc_ver:.rc%{rc_ver}}%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
@@ -101,6 +101,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Mon Jul 27 2020 sguelton@redhat.com - 10.0.1-1
+- 10.0.1
+
 * Sat Apr 4 2020 sguelton@redhat.com - 10.0.0-1
 - 10.0.0 final
 
