@@ -1,6 +1,6 @@
 %global toolchain clang
 #%%global rc_ver 1
-%global baserelease 0.2
+%global baserelease 1
 %global libcxxabi_srcdir libcxxabi-%{version}%{?rc_ver:rc%{rc_ver}}.src
 
 
@@ -105,6 +105,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Thu Oct 15 2020 sguelton@redhat.com - 11.0.0-1
+- Fix NVR
+
 * Tue Oct 13 2020 sguelton@redhat.com - 11.0.0-0.2
 - llvm 11.0.0 - final release
 
