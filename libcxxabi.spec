@@ -1,6 +1,6 @@
 %global toolchain clang
-#global rc_ver 3
-%global libcxxabi_version 13.0.0
+%global rc_ver 1
+%global libcxxabi_version 13.0.1
 %global libcxxabi_srcdir libcxxabi-%{libcxxabi_version}%{?rc_ver:rc%{rc_ver}}.src
 
 
@@ -66,7 +66,7 @@ sed -i 's|#define _LIBCXXABI_ARM_EHABI||g' include/__cxxabi_config.h
 %endif
 %endif
 
-%cmake  -GNinja \
+%cmake	-GNinja \
 	-DCMAKE_C_COMPILER=/usr/bin/clang \
 	-DCMAKE_CXX_COMPILER=/usr/bin/clang++ \
 	-DLLVM_CONFIG_PATH=%{_bindir}/llvm-config \
@@ -101,6 +101,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Wed Jan 12 2022 Nikita Popov <npopov@redhat.com> - 13.0.1~rc1-1
+- Update to LLVM 13.0.1rc1
+
 * Fri Oct 01 2021 Tom Stellard <tstellar@redhat.com> - 13.0.0-1
 - 13.0.0 Release
 
@@ -113,7 +116,7 @@ cp -a include/* %{buildroot}%{_includedir}
 * Tue Jul 13 2021 Tom Stellard <tstellar@redhat.com> - 12.0.1-1
 - 12.0.1 Release
 
-* Thu Jun 30 2021 Tom Stellard <tstellar@redhat.com> - 12.0.1~rc3-1
+* Wed Jun 30 2021 Tom Stellard <tstellar@redhat.com> - 12.0.1~rc3-1
 - 12.0.1-rc3 Release
 
 * Thu Jun 03 2021 Tom Stellard <tstellar@redhat.com> - 12.0.1~rc1-1
