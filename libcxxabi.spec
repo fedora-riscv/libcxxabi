@@ -1,12 +1,12 @@
 %global toolchain clang
-%global rc_ver 2
+#global rc_ver 2
 %global libcxxabi_version 13.0.1
 %global libcxxabi_srcdir libcxxabi-%{libcxxabi_version}%{?rc_ver:rc%{rc_ver}}.src
 
 
 Name:		libcxxabi
 Version:	%{libcxxabi_version}%{?rc_ver:~rc%{rc_ver}}
-Release:	2%{?dist}
+Release:	1%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
 URL:		http://libcxxabi.llvm.org/
@@ -101,6 +101,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Thu Feb 03 2022 Nikita Popov <npopov@redhat.com> - 13.0.1-1
+- Update to LLVM 13.0.1 final
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 13.0.1~rc2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
