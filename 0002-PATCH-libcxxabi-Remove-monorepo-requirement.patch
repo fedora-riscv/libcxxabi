@@ -21,15 +21,15 @@ index 9fb35860d483..abbdbfe7efaa 100644
  #===============================================================================
  # Setup Project
  #===============================================================================
-@@ -42,8 +38,6 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR LIBCXXABI_STANDALONE_B
-   set(LIBCXXABI_STANDALONE_BUILD 1)
-   set(LLVM_LIT_OUTPUT_DIR "${LIBCXXABI_BINARY_DIR}/bin")
- 
--  # Find the LLVM sources and simulate LLVM CMake options.
--  include(HandleOutOfTreeLLVM)
- endif()
+@@ -40,8 +46,6 @@ if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR OR LIBCXXABI_STANDALONE_B
+ include(GNUInstallDirs)
  
  if (LIBCXXABI_STANDALONE_BUILD)
+-  # Find the LLVM sources and simulate LLVM CMake options.
+-  include(HandleOutOfTreeLLVM)
+ 
+   find_package(Python3 COMPONENTS Interpreter)
+   if(NOT Python3_Interpreter_FOUND)
 -- 
 2.27.0
 

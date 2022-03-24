@@ -1,6 +1,6 @@
 %global toolchain clang
+%global libcxxabi_version 14.0.0
 #global rc_ver 2
-%global libcxxabi_version 13.0.1
 %global libcxxabi_srcdir libcxxabi-%{libcxxabi_version}%{?rc_ver:rc%{rc_ver}}.src
 
 
@@ -16,8 +16,10 @@ Source2:	tstellar-gpg-key.asc
 
 Patch0:		0001-PATCH-libcxxabi-Include-refstring.h-from-system-incl.patch
 Patch1:		0002-PATCH-libcxxabi-Remove-monorepo-requirement.patch
+Patch2:		add-llvm-cmake-package.patch
 
 BuildRequires:	clang llvm-devel cmake llvm-static ninja-build
+BuildRequires:	llvm-cmake-devel
 BuildRequires:	libcxx-devel >= %{version}
 %if 0%{?rhel}
 # libcxx-devel has this, so we need to as well.
@@ -101,6 +103,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Thu Mar 24 2022 Timm Bäder <tbaeder@redhat.com> - 14.0.0-1
+- Update to 14.0.0
+
 * Thu Feb 03 2022 Nikita Popov <npopov@redhat.com> - 13.0.1-1
 - Update to LLVM 13.0.1 final
 

@@ -1,26 +1,60 @@
-From 2586ab946f1e22891345c86e7f673bb11989e427 Mon Sep 17 00:00:00 2001
-From: Tom Stellard <tstellar@redhat.com>
-Date: Wed, 17 Feb 2021 12:50:08 -0800
-Subject: [PATCH 1/2] Include refstring.h from system includedir
-
----
- libcxxabi/src/stdlib_stdexcept.cpp | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/libcxxabi/src/stdlib_stdexcept.cpp b/libcxxabi/src/stdlib_stdexcept.cpp
-index 0ca378dcde01..d2daf40173c0 100644
---- a/libcxxabi/src/stdlib_stdexcept.cpp
-+++ b/libcxxabi/src/stdlib_stdexcept.cpp
-@@ -13,8 +13,7 @@
+diff -ruN a/libcxxabi-14.0.0rc2.src.orig/src/cxa_default_handlers.cpp a/libcxxabi-14.0.0rc2.src/src/cxa_default_handlers.cpp
+--- a/libcxxabi-14.0.0rc2.src.orig/src/cxa_default_handlers.cpp	2022-03-02 01:46:37.000000000 +0100
++++ a/libcxxabi-14.0.0rc2.src/src/cxa_default_handlers.cpp	2022-03-03 15:13:26.573237421 +0100
+@@ -16,7 +16,7 @@
+ #include "cxa_handlers.h"
+ #include "cxa_exception.h"
+ #include "private_typeinfo.h"
+-#include "include/atomic_support.h" // from libc++
++#include <libcxx-internal/atomic_support.h>
+ 
+ #if !defined(LIBCXXABI_SILENT_TERMINATE)
+ 
+diff -ruN a/libcxxabi-14.0.0rc2.src.orig/src/cxa_exception.cpp a/libcxxabi-14.0.0rc2.src/src/cxa_exception.cpp
+--- a/libcxxabi-14.0.0rc2.src.orig/src/cxa_exception.cpp	2022-03-02 01:46:37.000000000 +0100
++++ a/libcxxabi-14.0.0rc2.src/src/cxa_exception.cpp	2022-03-03 15:13:54.560419466 +0100
+@@ -17,7 +17,7 @@
+ #include "cxa_exception.h"
+ #include "cxa_handlers.h"
+ #include "fallback_malloc.h"
+-#include "include/atomic_support.h" // from libc++
++#include <libcxx-internal/atomic_support.h>
+ 
+ #if __has_feature(address_sanitizer)
+ #include <sanitizer/asan_interface.h>
+diff -ruN a/libcxxabi-14.0.0rc2.src.orig/src/cxa_guard_impl.h a/libcxxabi-14.0.0rc2.src/src/cxa_guard_impl.h
+--- a/libcxxabi-14.0.0rc2.src.orig/src/cxa_guard_impl.h	2022-03-02 01:46:37.000000000 +0100
++++ a/libcxxabi-14.0.0rc2.src/src/cxa_guard_impl.h	2022-03-03 15:14:07.350502656 +0100
+@@ -44,7 +44,7 @@
+  */
+ 
+ #include "__cxxabi_config.h"
+-#include "include/atomic_support.h" // from libc++
++#include <libcxx-internal/atomic_support.h>
+ #if defined(__has_include)
+ #  if __has_include(<sys/syscall.h>)
+ #    include <sys/syscall.h>
+diff -ruN a/libcxxabi-14.0.0rc2.src.orig/src/cxa_handlers.cpp a/libcxxabi-14.0.0rc2.src/src/cxa_handlers.cpp
+--- a/libcxxabi-14.0.0rc2.src.orig/src/cxa_handlers.cpp	2022-03-02 01:46:37.000000000 +0100
++++ a/libcxxabi-14.0.0rc2.src/src/cxa_handlers.cpp	2022-03-03 15:13:43.419346996 +0100
+@@ -17,7 +17,7 @@
+ #include "cxa_handlers.h"
+ #include "cxa_exception.h"
+ #include "private_typeinfo.h"
+-#include "include/atomic_support.h" // from libc++
++#include <libcxx-internal/atomic_support.h>
+ 
+ namespace std
+ {
+diff -ruN a/libcxxabi-14.0.0rc2.src.orig/src/stdlib_stdexcept.cpp a/libcxxabi-14.0.0rc2.src/src/stdlib_stdexcept.cpp
+--- a/libcxxabi-14.0.0rc2.src.orig/src/stdlib_stdexcept.cpp	2022-03-02 01:46:37.000000000 +0100
++++ a/libcxxabi-14.0.0rc2.src/src/stdlib_stdexcept.cpp	2022-03-03 14:36:19.052773915 +0100
+@@ -12,7 +12,7 @@
+ #include <cstring>
  #include <cstdint>
  #include <cstddef>
- 
--// This includes an implementation file from libc++.
--#include "src/include/refstring.h"
+-#include "include/refstring.h" // from libc++
 +#include <libcxx-internal/refstring.h>
  
  static_assert(sizeof(std::__libcpp_refstring) == sizeof(const char *), "");
  
--- 
-2.27.0
-
