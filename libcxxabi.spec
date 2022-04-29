@@ -6,7 +6,7 @@
 
 Name:		libcxxabi
 Version:	%{libcxxabi_version}%{?rc_ver:~rc%{rc_ver}}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
 URL:		http://libcxxabi.llvm.org/
@@ -19,7 +19,6 @@ Patch1:		0002-PATCH-libcxxabi-Remove-monorepo-requirement.patch
 Patch2:		add-llvm-cmake-package.patch
 
 BuildRequires:	clang llvm-devel cmake llvm-static ninja-build
-BuildRequires:	llvm-cmake-devel
 BuildRequires:	libcxx-devel >= %{version}
 %if 0%{?rhel}
 # libcxx-devel has this, so we need to as well.
@@ -103,6 +102,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Fri Apr 29 2022 Timm Bäder <tbaeder@redhat.com> - 14.0.0-2
+- Remove llvm-cmake-devel BR
+
 * Thu Mar 24 2022 Timm Bäder <tbaeder@redhat.com> - 14.0.0-1
 - Update to 14.0.0
 
