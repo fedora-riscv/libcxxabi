@@ -1,12 +1,12 @@
 %global toolchain clang
-%global libcxxabi_version 14.0.0
+%global libcxxabi_version 14.0.5
 #global rc_ver 2
 %global libcxxabi_srcdir libcxxabi-%{libcxxabi_version}%{?rc_ver:rc%{rc_ver}}.src
 
 
 Name:		libcxxabi
 Version:	%{libcxxabi_version}%{?rc_ver:~rc%{rc_ver}}
-Release:	2%{?dist}
+Release:	1%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
 URL:		http://libcxxabi.llvm.org/
@@ -102,6 +102,9 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.a
 
 %changelog
+* Mon Jun 20 2022 Timm Bäder <tabeder@redhat.com> - 14.0.5-1
+- Update to 14.0.5
+
 * Fri Apr 29 2022 Timm Bäder <tbaeder@redhat.com> - 14.0.0-2
 - Remove llvm-cmake-devel BR
 
