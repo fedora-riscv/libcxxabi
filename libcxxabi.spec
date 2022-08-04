@@ -113,7 +113,7 @@ cp -a include/* %{buildroot}%{_includedir}
 * Tue Jul 13 2021 Tom Stellard <tstellar@redhat.com> - 12.0.1-1
 - 12.0.1 Release
 
-* Thu Jun 30 2021 Tom Stellard <tstellar@redhat.com> - 12.0.1~rc3-1
+* Wed Jun 30 2021 Tom Stellard <tstellar@redhat.com> - 12.0.1~rc3-1
 - 12.0.1-rc3 Release
 
 * Thu Jun 03 2021 Tom Stellard <tstellar@redhat.com> - 12.0.1~rc1-1
