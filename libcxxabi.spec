@@ -1,22 +1,21 @@
 %global toolchain clang
-%global libcxxabi_version 14.0.5
-#global rc_ver 2
+%global libcxxabi_version 15.0.0
+#global rc_ver 3
 %global libcxxabi_srcdir libcxxabi-%{libcxxabi_version}%{?rc_ver:rc%{rc_ver}}.src
 
 
 Name:		libcxxabi
 Version:	%{libcxxabi_version}%{?rc_ver:~rc%{rc_ver}}
-Release:	2%{?dist}
+Release:	1%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
 URL:		http://libcxxabi.llvm.org/
 Source0:	https://github.com/llvm/llvm-project/releases/download/llvmorg-%{libcxxabi_version}%{?rc_ver:-rc%{rc_ver}}/%{libcxxabi_srcdir}.tar.xz
 Source1:	https://github.com/llvm/llvm-project/releases/download/llvmorg-%{libcxxabi_version}%{?rc_ver:-rc%{rc_ver}}/%{libcxxabi_srcdir}.tar.xz.sig
-Source2:	tstellar-gpg-key.asc
+Source2:	release-keys.asc
 
 Patch0:		0001-PATCH-libcxxabi-Include-refstring.h-from-system-incl.patch
-Patch1:		0002-PATCH-libcxxabi-Remove-monorepo-requirement.patch
-Patch2:		add-llvm-cmake-package.patch
+Patch1:		0001-Fixup-libcxx-include-path.patch
 
 BuildRequires:	clang llvm-devel cmake llvm-static ninja-build
 BuildRequires:	libcxx-devel >= %{version}
@@ -48,8 +47,6 @@ Summary:	Static libraries for libcxxabi
 %{gpgverify} --keyring='%{SOURCE2}' --signature='%{SOURCE1}' --data='%{SOURCE0}'
 %autosetup -n %{libcxxabi_srcdir} -p2
 
-sed -i 's|${LLVM_BINARY_DIR}/share/llvm/cmake|%{_libdir}/cmake/llvm|g' CMakeLists.txt
-
 %build
 %ifarch armv7hl
 # Disable LTO on ARM. bfd crashes during some of the CMake compiler checks with:
@@ -70,7 +67,7 @@ sed -i 's|#define _LIBCXXABI_ARM_EHABI||g' include/__cxxabi_config.h
 %cmake	-GNinja \
 	-DCMAKE_C_COMPILER=/usr/bin/clang \
 	-DCMAKE_CXX_COMPILER=/usr/bin/clang++ \
-	-DLLVM_CONFIG_PATH=%{_bindir}/llvm-config \
+	-DCMAKE_MODULE_PATH=%{_libdir}/cmake/llvm \
 	-DCMAKE_CXX_FLAGS="-std=c++11" \
 	-DLIBCXXABI_LIBCXX_INCLUDES=%{_includedir}/c++/v1/ \
 %if 0%{?__isa_bits} == 64
@@ -84,9 +81,6 @@ sed -i 's|#define _LIBCXXABI_ARM_EHABI||g' include/__cxxabi_config.h
 %install
 %cmake_install
 
-mkdir -p %{buildroot}%{_includedir}
-cp -a include/* %{buildroot}%{_includedir}
-
 %ldconfig_scriptlets
 
 %files
@@ -95,13 +89,16 @@ cp -a include/* %{buildroot}%{_includedir}
 %{_libdir}/libc++abi.so.*
 
 %files devel
-%{_includedir}/*.h
+%{_includedir}/c++/v1/*.h
 %{_libdir}/libc++abi.so
 
 %files static
 %{_libdir}/libc++abi.a
 
 %changelog
+* Tue Sep 06 2022 Nikita Popov <npopov@redhat.com> - 15.0.0-1
+- Update to LLVM 15.0.0
+
 * Thu Jul 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 14.0.5-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
