@@ -6,7 +6,7 @@
 
 Name:		libcxxabi
 Version:	%{libcxxabi_version}%{?rc_ver:~rc%{rc_ver}}
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
 URL:		http://libcxxabi.llvm.org/
@@ -68,7 +68,6 @@ sed -i 's|#define _LIBCXXABI_ARM_EHABI||g' include/__cxxabi_config.h
 	-DCMAKE_C_COMPILER=/usr/bin/clang \
 	-DCMAKE_CXX_COMPILER=/usr/bin/clang++ \
 	-DCMAKE_MODULE_PATH=%{_libdir}/cmake/llvm \
-	-DCMAKE_CXX_FLAGS="-std=c++11" \
 	-DLIBCXXABI_LIBCXX_INCLUDES=%{_includedir}/c++/v1/ \
 %if 0%{?__isa_bits} == 64
 	-DLIBCXXABI_LIBDIR_SUFFIX:STRING=64 \
@@ -96,6 +95,9 @@ sed -i 's|#define _LIBCXXABI_ARM_EHABI||g' include/__cxxabi_config.h
 %{_libdir}/libc++abi.a
 
 %changelog
+* Mon Sep 12 2022 Nikita Popov <npopov@redhat.com> - 15.0.0-2
+- Don't pass explicit CMAKE_CXX_FLAGS
+
 * Tue Sep 06 2022 Nikita Popov <npopov@redhat.com> - 15.0.0-1
 - Update to LLVM 15.0.0
 
