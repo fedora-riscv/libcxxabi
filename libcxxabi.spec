@@ -1,12 +1,12 @@
 %global toolchain clang
-%global libcxxabi_version 15.0.0
+%global libcxxabi_version 15.0.4
 #global rc_ver 3
 %global libcxxabi_srcdir libcxxabi-%{libcxxabi_version}%{?rc_ver:rc%{rc_ver}}.src
 
 
 Name:		libcxxabi
 Version:	%{libcxxabi_version}%{?rc_ver:~rc%{rc_ver}}
-Release:	2%{?dist}
+Release:	1%{?dist}
 Summary:	Low level support for a standard C++ library
 License:	MIT or NCSA
 URL:		http://libcxxabi.llvm.org/
@@ -95,6 +95,9 @@ sed -i 's|#define _LIBCXXABI_ARM_EHABI||g' include/__cxxabi_config.h
 %{_libdir}/libc++abi.a
 
 %changelog
+* Wed Nov 09 2022 Nikita Popov <npopov@redhat.com> - 15.0.4-1
+- Update to LLVM 15.0.4
+
 * Mon Sep 12 2022 Nikita Popov <npopov@redhat.com> - 15.0.0-2
 - Don't pass explicit CMAKE_CXX_FLAGS
 
