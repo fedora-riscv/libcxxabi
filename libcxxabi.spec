@@ -1,5 +1,5 @@
 %global toolchain clang
-%global libcxxabi_version 15.0.4
+%global libcxxabi_version 15.0.6
 #global rc_ver 3
 %global libcxxabi_srcdir libcxxabi-%{libcxxabi_version}%{?rc_ver:rc%{rc_ver}}.src
 
@@ -95,6 +95,9 @@ sed -i 's|#define _LIBCXXABI_ARM_EHABI||g' include/__cxxabi_config.h
 %{_libdir}/libc++abi.a
 
 %changelog
+* Tue Dec 06 2022 Nikita Popov <npopov@redhat.com> - 15.0.6-1
+- Update to LLVM 15.0.6
+
 * Wed Nov 09 2022 Nikita Popov <npopov@redhat.com> - 15.0.4-1
 - Update to LLVM 15.0.4
 
